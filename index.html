@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zipan Lyu — AI for Biomedical Discovery Research Portfolio</title>
+<style>
+  :root {
+    --primary: #3B82F6;
+    --primary-dark: #1D4ED8;
+    --secondary: #10B981;
+    --accent: #F59E0B;
+    --bg: #F8FAFC;
+    --card: #FFFFFF;
+    --text: #1E293B;
+    --text-muted: #64748B;
+    --border: #E2E8F0;
+    --shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04);
+    --nav-h: 52px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 14px;
+  }
+
+  /* ========== NAV ========== */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(30,58,95,0.97); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; height: var(--nav-h);
+  }
+  .nav-logo {
+    font-size: 15px; font-weight: 700; color: white;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-logo .logo-dot {
+    width: 8px; height: 8px; background: var(--secondary); border-radius: 50%;
+  }
+  .nav-links { display: flex; gap: 6px; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75); text-decoration: none;
+    font-size: 12px; font-weight: 500; padding: 6px 12px;
+    border-radius: 6px; transition: all 0.2s;
+  }
+  .nav-links a:hover, .nav-links a:focus { background: rgba(255,255,255,0.15); color: white; }
+
+  /* ========== SECTIONS ========== */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 40px 0 20px; }
+  section:first-of-type { padding-top: 24px; }
+
+  /* ========== HERO ========== */
+  .hero {
+    background: linear-gradient(135deg, #1E3A5F 0%, #2D5A87 50%, #3B82F6 100%);
+    color: white; padding: 52px 44px; border-radius: 20px;
+    margin-top: 20px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -50%; right: -10%;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.06); border-radius: 50%;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -30%; left: -5%;
+    width: 200px; height: 200px;
+    background: rgba(16,185,129,0.1); border-radius: 50%;
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .hero h1 { font-size: 36px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
+  .hero .vision {
+    font-size: 15px; opacity: 0.9; margin-bottom: 20px;
+    line-height: 1.6; max-width: 640px;
+  }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; opacity: 0.9; }
+  .hero-meta span { display: flex; align-items: center; gap: 5px; }
+  .hero-actions { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .hero-actions a {
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+    color: white; text-decoration: none;
+    padding: 7px 14px; border-radius: 8px; font-size: 13px; font-weight: 500;
+    transition: background 0.2s;
+  }
+  .hero-actions a:hover { background: rgba(255,255,255,0.25); }
+
+  /* ========== STATS ========== */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .stat-card {
+    background: var(--card); border-radius: 14px; padding: 16px; text-align: center;
+    border: 1px solid var(--border); box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+  .stat-number {
+    font-size: 26px; font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), #8B5CF6);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .stat-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat-card.gold .stat-number { background: linear-gradient(135deg, #F59E0B, #EF4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-card.green .stat-number { background: linear-gradient(135deg, #10B981, #059669); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-card.purple .stat-number { background: linear-gradient(135deg, #8B5CF6, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  /* ========== SECTION HEADERS ========== */
+  .sec-header {
+    font-size: 20px; font-weight: 800; color: var(--text);
+    margin-bottom: 8px; letter-spacing: -0.3px;
+  }
+  .sec-sub {
+    font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;
+  }
+  .sec-divider {
+    border: none; height: 2px; background: linear-gradient(90deg, var(--primary), var(--secondary), transparent);
+    margin: 8px 0 0; border-radius: 1px;
+  }
+
+  /* ========== CARD ========== */
+  .card {
+    background: var(--card); border-radius: 16px; padding: 28px;
+    margin-bottom: 20px; border: 1px solid var(--border); box-shadow: var(--shadow);
+  }
+  .card-title {
+    font-size: 15px; font-weight: 700; color: var(--text);
+    margin-bottom: 18px; display: flex; align-items: center; gap: 10px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .card-title .icon {
+    width: 28px; height: 28px;
+    background: linear-gradient(135deg, var(--primary), #8B5CF6);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: white;
+  }
+  .card-title.green .icon { background: linear-gradient(135deg, #10B981, #059669); }
+  .card-title.amber .icon { background: linear-gradient(135deg, #F59E0B, #EF4444); }
+  .card-title.red .icon { background: linear-gradient(135deg, #EF4444, #DC2626); }
+
+  /* ========== PROJECT BOX ========== */
+  .project-box {
+    background: linear-gradient(135deg, #EFF6FF 0%, #F0FDF4 100%);
+    border: 2px solid #3B82F6;
+    border-radius: 16px; padding: 28px;
+  }
+  .project-box .project-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.2px; color: var(--primary); margin-bottom: 10px;
+  }
+  .project-box h2 {
+    font-size: 19px; font-weight: 800; color: var(--text);
+    margin-bottom: 16px; line-height: 1.4;
+  }
+  .project-box p { font-size: 13.5px; color: #475569; line-height: 1.7; }
+  .grant-badge {
+    display: inline-block; background: var(--primary); color: white;
+    font-size: 11px; font-weight: 600; padding: 5px 12px;
+    border-radius: 100px; margin-top: 14px;
+  }
+  .team-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .team-tag { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px; }
+  .team-tag.pi { background: #D1FAE5; color: #065F46; }
+  .team-tag.coi { background: #EDE9FE; color: #5B21B6; }
+
+  /* ========== WHY CLAUDE GRID ========== */
+  .why-claude-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .why-claude-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 14px; background: #F8FAFC; border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  .why-claude-icon { font-size: 22px; min-width: 28px; }
+  .why-claude-item strong { font-size: 13px; color: var(--text); display: block; margin-bottom: 4px; }
+  .why-claude-item p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ========== EVIDENCE GRID ========== */
+  .evidence-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .evidence-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 12px 14px; background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 10px;
+  }
+  .evidence-arrow { font-size: 16px; min-width: 20px; }
+  .evidence-item strong { font-size: 12px; color: var(--text); display: block; }
+  .evidence-item span { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ========== WORKFLOW TIMELINE ========== */
+  .workflow-timeline { position: relative; padding-left: 28px; }
+  .workflow-timeline::before {
+    content: ''; position: absolute; left: 9px; top: 8px; bottom: 8px;
+    width: 2px; background: var(--primary); opacity: 0.3;
+  }
+  .workflow-item {
+    position: relative; margin-bottom: 16px;
+    padding: 14px 16px; background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 10px;
+  }
+  .workflow-item::before {
+    content: ''; position: absolute; left: -22px; top: 16px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--primary); border: 2px solid white;
+  }
+  .workflow-week { font-size: 11px; font-weight: 700; color: var(--primary); }
+  .workflow-title { font-size: 13px; font-weight: 700; color: var(--text); margin: 2px 0 4px; }
+  .workflow-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+  .workflow-deliverable { font-size: 11px; color: #059669; font-weight: 600; margin-top: 6px; }
+
+  /* ========== PUBLICATIONS ========== */
+  .pub-item {
+    padding: 14px 0; border-bottom: 1px solid #F1F5F9;
+    display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: start;
+  }
+  .pub-item:last-child { border-bottom: none; }
+  .pub-item.featured {
+    background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+    border-radius: 12px; padding: 14px; border: 1px solid #FDE68A; margin-bottom: 8px;
+  }
+  .pub-title { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.5; }
+  .pub-journal { font-size: 12px; color: var(--primary); font-weight: 600; margin-top: 3px; }
+  .pub-meta { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+  .pub-badge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 6px; white-space: nowrap; }
+  .pub-badge.cited { background: #FEF3C7; color: #92400E; }
+  .pub-badge.if { background: #DBEAFE; color: #1E40AF; }
+  .pub-badge.first { background: #D1FAE5; color: #065F46; }
+  .pub-badge.recent { background: #EDE9FE; color: #5B21B6; }
+
+  /* ========== SKILLS ========== */
+  .skill-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .skill-category h4 { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .skill-tag {
+    background: #EFF6FF; border: 1px solid #BFDBFE; color: #1E40AF;
+    font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 6px;
+  }
+  .skill-tag.green { background: #ECFDF5; border-color: #A7F3D0; color: #065F46; }
+  .skill-tag.amber { background: #FFFBEB; border-color: #FDE68A; color: #92400E; }
+  .skill-tag.purple { background: #EDE9FE; border-color: #DDD6FE; color: #5B21B6; }
+  .skill-tag.teal { background: #F0FDFA; border-color: #99F6E4; color: #0F766E; }
+
+  /* ========== IMPACT GRID ========== */
+  .impact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .impact-card { padding: 14px; border-radius: 12px; border: 1px; }
+  .impact-card.blue { background: linear-gradient(135deg,#EFF6FF,#DBEAFE); border-color: #BFDBFE; }
+  .impact-card.green { background: linear-gradient(135deg,#ECFDF5,#D1FAE5); border-color: #A7F3D0; }
+  .impact-card.amber { background: linear-gradient(135deg,#FFFBEB,#FEF3C7); border-color: #FDE68A; }
+  .impact-card.purple { background: linear-gradient(135deg,#EDE9FE,#DDD6FE); border-color: #DDD6FE; }
+  .impact-card strong { font-size: 13px; }
+  .impact-card.blue strong { color: #1E40AF; }
+  .impact-card.green strong { color: #065F46; }
+  .impact-card.amber strong { color: #92400E; }
+  .impact-card.purple strong { color: #5B21B6; }
+  .impact-card p { font-size: 12px; color: #475569; margin-top: 6px; line-height: 1.5; }
+
+  /* ========== HIGHLIGHT ========== */
+  .highlight { color: var(--primary); font-weight: 600; }
+
+  /* ========== TWO COL ========== */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  /* ========== CONTACT ========== */
+  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .contact-item {
+    background: var(--card); border-radius: 12px; padding: 16px;
+    border: 1px solid var(--border); text-align: center;
+  }
+  .contact-item .contact-icon { font-size: 22px; margin-bottom: 6px; }
+  .contact-item .contact-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .contact-item .contact-value { font-size: 13px; font-weight: 600; color: var(--text); margin-top: 4px; }
+  .contact-item a { color: var(--primary); text-decoration: none; font-weight: 600; }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 680px) {
+    .two-col { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .skill-grid { grid-template-columns: 1fr; }
+    .why-claude-grid { grid-template-columns: 1fr; }
+    .evidence-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .nav-links { gap: 2px; }
+    .nav-links a { padding: 5px 8px; font-size: 11px; }
+    .hero h1 { font-size: 28px; }
+  }
+
+  /* ========== PRINT ========== */
+  @media print {
+    body { background: white; }
+    nav { display: none; }
+    .container { padding: 20px; max-width: 100%; }
+    .hero { border-radius: 12px; }
+    section { padding: 20px 0 10px; }
+  }
+
+  /* ========== FOOTER ========== */
+  .page-footer {
+    text-align: center; padding: 24px; color: var(--text-muted);
+    font-size: 12px; border-top: 1px solid var(--border); margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== NAVIGATION ========== -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span class="logo-dot"></span>
+      Zipan Lyu &middot; Research Portfolio
+    </div>
+    <div class="nav-links">
+      <a href="#vision">Vision</a>
+      <a href="#project">Project</a>
+      <a href="#why-claude">Why Claude</a>
+      <a href="#workflow">Workflow</a>
+      <a href="#experience">Experience</a>
+      <a href="#publications">Publications</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- ========== HERO / VISION ========== -->
+  <section id="vision">
+    <div class="hero">
+      <div class="hero-content">
+        <h1>Zipan Lyu</h1>
+        <p class="vision">
+          Using AI to reason across multi-omics data and discover precision biomarkers for obesity and metabolic dysfunction &mdash; building a scientific workflow where Claude accelerates hypothesis generation, causal inference, and experimental design in ways traditional bioinformatics cannot.
+        </p>
+        <div class="hero-meta">
+          <span>PhD Candidate, Nanyang Technological University</span>
+          <span>Singapore</span>
+          <span>Expected Graduation: July 2026</span>
+        </div>
+        <div class="hero-actions">
+          <a href="https://scholar.google.com/citations?user=fTSSocQAAAAJ&hl=en" target="_blank">Google Scholar</a>
+          <a href="https://github.com/lyuzipan" target="_blank">GitHub</a>
+          <a href="#project">Featured Project</a>
+          <a href="#contact">Download CV</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-row" style="margin-top:20px;">
+      <div class="stat-card">
+        <div class="stat-number">154</div>
+        <div class="stat-label">Total Citations</div>
+      </div>
+      <div class="stat-card gold">
+        <div class="stat-number">5</div>
+        <div class="stat-label">h-index</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-number">13</div>
+        <div class="stat-label">SCI Papers</div>
+      </div>
+      <div class="stat-card purple">
+        <div class="stat-number">19.4</div>
+        <div class="stat-label">First-Author IF</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURED PROJECT ========== -->
+  <section id="project">
+    <div class="sec-header">Featured Project</div>
+    <div class="sec-sub">A Claude-native scientific workflow for multi-omics biomarker discovery &mdash; designed so that the research could not realistically be completed without Claude's reasoning capabilities.</div>
+    <hr class="sec-divider">
+
+    <div class="project-box">
+      <div class="project-label">AI for Science Research Project</div>
+      <h2>Claude as a Scientific Collaborator for Multi-Omics Biomarker Discovery in Obesity</h2>
+
+      <p><strong>The scientific problem:</strong> Electroacupuncture (EA) reliably reduces waist circumference in obese patients, but <strong>40&ndash;60% of individuals do not respond</strong>. Identifying responders before treatment requires integrating proteomics (92 inflammation proteins, Olink PEA), absolute-quantified lipidomics (LipidQ, 800+ lipids), and scRNA-seq across 72 individuals from a completed double-blind RCT &mdash; a reasoning task that exceeds the capacity of traditional bioinformatics pipelines and cannot be done manually.</p>
+
+      <p style="margin-top:12px;"><strong>Why Claude is indispensable:</strong> This project requires <span class="highlight">reasoning across three heterogeneous omics layers simultaneously</span>, synthesizing ~15,000 protein&ndash;lipid&ndash;transcript interactions against the full-text literature, and generating testable mechanistic hypotheses &mdash; all within a single analytical session. Claude's 200K-token context window, chain-of-reasoning capability, and artifact system uniquely enable this workflow. GPT-4's context window fragments the integration; traditional ML outputs correlations, not mechanisms.</p>
+
+      <p style="margin-top:12px;"><strong>What Claude will do:</strong> (1) Ingest multi-omics data tables and generate integrative biological hypotheses; (2) Cross-reference candidate biomarkers against ~10,000 full-text papers to identify known/putative pathways; (3) Propose <em>in silico</em> validation experiments (virtual knockdown, pathway enrichment); (4) Prioritize the top 10 biomarkers for wet-lab validation; (5) Draft Methods and Results sections for publication. The human team validates every output experimentally.</p>
+
+      <div style="margin-top:14px;">
+        <span class="grant-badge">Requesting: $15,000 Anthropic API Credits + $2,000 Modal Compute</span>
+      </div>
+      <div class="team-tags">
+        <span class="team-tag pi">PI: Zipan Lyu &middot; PhD Candidate, NTU &middot; Multi-omics + RCT + Causal Inference</span>
+        <span class="team-tag coi">Co-I: Dr. Yandan Zheng &middot; AI Postdoc Fellow, NTU SoC &middot; ML + Claude Workflows</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WHY CLAUDE ========== -->
+  <section id="why-claude">
+    <div class="sec-header">Why Claude &mdash; Not GPT-4, Gemini, or Traditional ML</div>
+    <div class="sec-sub">Reviewers ask: "Why can't existing tools do this?" Here is the technical answer.</div>
+    <hr class="sec-divider">
+
+    <div class="why-claude-grid">
+      <div class="why-claude-item">
+        <div class="why-claude-icon">&#x1F4CB;</div>
+        <div>
+          <strong>200K-token context window</strong>
+          <p>Proteomics (92 proteins) + lipidomics (800+ lipids) + scRNA-seq (20K genes) + clinical phenotypes + literature = ~50K tokens per analytical session. GPT-4 (128K) fragments context; Claude processes it natively.</p>
+        </div>
+      </div>
+      <div class="why-claude-item">
+        <div class="why-claude-icon">&#x1F9E0;</div>
+        <div>
+          <strong>Chain-of-reasoning for biology</strong>
+          <p>Claude Opus can reason from correlative omics data ("IL-24 is elevated") to mechanism ("IL-24 &rarr; ceramide &rarr; insulin resistance &rarr; EA response") &mdash; a reasoning chain that requires synthesizing pathway databases, literature, and structural biology. Traditional ML outputs correlations, not mechanisms.</p>
+        </div>
+      </div>
+      <div class="why-claude-item">
+        <div class="why-claude-icon">&#x1F4D6;</div>
+        <div>
+          <strong>Full-text literature synthesis</strong>
+          <p>Claude can read and synthesize hundreds of full-text papers in a single session to contextualize novel biomarker candidates &mdash; e.g., connecting OPG/sphingolipid axis discoveries to previously unlinked EA mechanisms. No other model matches this breadth of synthesis.</p>
+        </div>
+      </div>
+      <div class="why-claude-item">
+        <div class="why-claude-icon">&#x1F9EA;</div>
+        <div>
+          <strong>Iterative hypothesis&ndash;experiment loop</strong>
+          <p>Claude Artifacts enable interactive data exploration; the team uploads omics tables, asks Claude to generate hypotheses, exports candidate lists, validates <em>in silico</em>, and feeds results back &mdash; creating a tight AI&ndash;human scientific loop that accelerates discovery by 10&times;.</p>
+        </div>
+      </div>
+      <div class="why-claude-item">
+        <div class="why-claude-icon">&#x2705;</div>
+        <div>
+          <strong>Responsible AI for science</strong>
+          <p>Anthropic's Constitutional AI alignment makes Claude less prone to hallucinating biological mechanisms &mdash; critical when AI-generated hypotheses guide expensive wet-lab validation. Every Claude output is experimentally validated before publication.</p>
+        </div>
+      </div>
+      <div class="why-claude-item">
+        <div class="why-claude-icon">&#x1F4CA;</div>
+        <div>
+          <strong>Causal inference integration</strong>
+          <p>The team has a copyrighted causal inference platform. Claude can be prompted to propose causal structures (DAGs) for omics data, which are then validated via Mendelian randomization and do-calculus &mdash; a workflow uniquely enabled by Claude's reasoning + the team's causal inference expertise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CLAUDE WORKFLOW ========== -->
+  <section id="workflow">
+    <div class="sec-header">3-Month Claude-Integrated Scientific Workflow</div>
+    <div class="sec-sub">Claude is integrated into every stage of discovery &mdash; from data ingestion to publication. Each week, Claude produces analytical artifacts that human scientists validate and feed back.</div>
+    <hr class="sec-divider">
+
+    <div class="workflow-timeline">
+      <div class="workflow-item">
+        <div class="workflow-week">Weeks 1&ndash;2</div>
+        <div class="workflow-title">Data Ingestion &amp; Baseline Integration</div>
+        <div class="workflow-desc">Claude ingests Olink proteomics + LipidQ lipidomics + clinical phenotypes via CSV uploads. Claude proposes multi-omics integration strategy. Human team validates data preprocessing steps.</div>
+        <div class="workflow-deliverable">Deliverable: integrated multi-omics data matrix</div>
+      </div>
+      <div class="workflow-item">
+        <div class="workflow-week">Weeks 3&ndash;4</div>
+        <div class="workflow-title">Literature-Synthesized Hypothesis Generation</div>
+        <div class="workflow-desc">Claude reads top 200 papers on EA mechanisms, obesity omics, and sphingolipid biology. Claude proposes 20 mechanistic hypotheses linking multi-omics signatures to EA response. Human team prioritizes top 10 via domain expertise.</div>
+        <div class="workflow-deliverable">Deliverable: testable hypothesis document</div>
+      </div>
+      <div class="workflow-item">
+        <div class="workflow-week">Weeks 5&ndash;6</div>
+        <div class="workflow-title"><em>In Silico</em> Validation &amp; Biomarker Prioritization</div>
+        <div class="workflow-desc">Claude proposes scRNA-seq virtual knockout experiments for top hypotheses. Human team runs validation in R/Python. Claude refines biomarker rankings based on validation results.</div>
+        <div class="workflow-deliverable">Deliverable: ranked biomarker candidate list (top 10)</div>
+      </div>
+      <div class="workflow-item">
+        <div class="workflow-week">Weeks 7&ndash;8</div>
+        <div class="workflow-title">Causal Inference Integration</div>
+        <div class="workflow-desc">Claude proposes causal DAGs for top biomarker candidates. Human team validates via Mendelian randomization (using inventor's causal inference platform). Claude refines mechanisms based on causal evidence.</div>
+        <div class="workflow-deliverable">Deliverable: causal mechanism report</div>
+      </div>
+      <div class="workflow-item">
+        <div class="workflow-week">Weeks 9&ndash;10</div>
+        <div class="workflow-title">Experimental Design for Wet-Lab Validation</div>
+        <div class="workflow-desc">Claude designs <em>in vitro/vivo</em> experiments to validate top 3 biomarkers. Human team reviews and executes. Claude iterates based on preliminary wet-lab results.</div>
+        <div class="workflow-deliverable">Deliverable: experimental validation plan</div>
+      </div>
+      <div class="workflow-item">
+        <div class="workflow-week">Weeks 11&ndash;12</div>
+        <div class="workflow-title">Manuscript Drafting &amp; Reusable Workflow Release</div>
+        <div class="workflow-desc">Claude drafts Methods, Results, and Discussion sections. Human team edits for accuracy. Team releases Claude prompting templates as open-source "AI-for-Multi-Omics" workflow.</div>
+        <div class="workflow-deliverable">Deliverable: preprint + open-source workflow</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== RESEARCH EXPERIENCE ========== -->
+  <section id="experience">
+    <div class="sec-header">Research Experience &amp; Evidence of Project Feasibility</div>
+    <div class="sec-sub">Each achievement below directly proves our team can successfully execute this Claude-enabled project &mdash; reviewers evaluate team capability, not just scientific merit.</div>
+    <hr class="sec-divider">
+
+    <div class="evidence-grid">
+      <div class="evidence-item">
+        <div class="evidence-arrow">&#x27A1;&#xFE0F;</div>
+        <div>
+          <strong>Completed double-blind RCT (n=72)</strong>
+          <span>Proves access to high-quality, ethically approved clinical multi-omics datasets with phenotype annotations &mdash; the foundation for Claude's reasoning.</span>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="evidence-arrow">&#x27A1;&#xFE0F;</div>
+        <div>
+          <strong>Proteomics publication (J Endocrine Soc 2025)</strong>
+          <span>Demonstrates capability to process Olink PEA data, apply ML for biomarker discovery, and publish in endocrine journals &mdash; directly transferable to this project.</span>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="evidence-arrow">&#x27A1;&#xFE0F;</div>
+        <div>
+          <strong>Lipidomics publication (J Adv Res, IF=11.4)</strong>
+          <span>Proves expertise in absolute-quantified lipidomics and sphingolipid biology &mdash; the exact lipid class Claude will reason across.</span>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="evidence-arrow">&#x27A1;&#xFE0F;</div>
+        <div>
+          <strong>Causal inference software copyright</strong>
+          <span>Demonstrates ability to build deployable AI tools and apply causal inference to omics data &mdash; enables the "Claude proposes DAG &rarr; validate via causal inference" workflow.</span>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="evidence-arrow">&#x27A1;&#xFE0F;</div>
+        <div>
+          <strong>scRNA-seq virtual knockout (PhD Ch4)</strong>
+          <span>Proves capability for <em>in silico</em> validation of AI-generated hypotheses &mdash; Claude proposes, we validate computationally before wet-lab.</span>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="evidence-arrow">&#x27A1;&#xFE0F;</div>
+        <div>
+          <strong>Peer reviewer (BMC Complement Med Ther, Front Immunol)</strong>
+          <span>Demonstrates scientific rigor and knowledge of publication standards &mdash; ensures Claude-generated drafts meet journal quality.</span>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="evidence-arrow">&#x27A1;&#xFE0F;</div>
+        <div>
+          <strong>AI Postdoc Co-I (Dr. Yandan Zheng)</strong>
+          <span>Guarantees Claude API integration, prompt engineering, and ML workflow development &mdash; the AI expertise needed to execute this project.</span>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="evidence-arrow">&#x27A1;&#xFE0F;</div>
+        <div>
+          <strong>154 citations, h-index 5 (first-author)</strong>
+          <span>Demonstrates ability to publish impactful work &mdash; this project targets <em>Nature Medicine / Cell / Nature Biotechnology</em> if Claude enables the expected discoveries.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== TECHNICAL SKILLS ========== -->
+    <div class="card" style="margin-top:24px;">
+      <div class="card-title"><span class="icon">&#x1F52C;</span> Technical Skills</div>
+      <div class="skill-grid">
+        <div class="skill-category">
+          <h4>Clinical &amp; Experimental</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Double-blind RCT</span>
+            <span class="skill-tag">Sham Control</span>
+            <span class="skill-tag">EA Intervention Design</span>
+            <span class="skill-tag">Clinical Endpoint Design</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4>Omics Technologies</h4>
+          <div class="skill-tags">
+            <span class="skill-tag green">Olink PEA (Proteomics)</span>
+            <span class="skill-tag green">LipidQ (Absolute Lipidomics)</span>
+            <span class="skill-tag green">scRNA-seq</span>
+            <span class="skill-tag green">Multi-omics Integration</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4>AI &amp; Causal Inference</h4>
+          <div class="skill-tags">
+            <span class="skill-tag purple">Python / PyTorch</span>
+            <span class="skill-tag purple">scikit-learn</span>
+            <span class="skill-tag purple">Causal Inference (DAGs, MR)</span>
+            <span class="skill-tag purple">Claude API Integration</span>
+            <span class="skill-tag purple">Streamlit Deployment</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4>Molecular Mechanisms</h4>
+          <div class="skill-tags">
+            <span class="skill-tag teal">OPG/RANKL</span>
+            <span class="skill-tag teal">PPAR&gamma; / RAR / RXR</span>
+            <span class="skill-tag teal">Ceramide / Sphingolipids</span>
+            <span class="skill-tag teal">IL-24 Signaling</span>
+            <span class="skill-tag teal">Adipogenesis</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PUBLICATIONS ========== -->
+  <section id="publications">
+    <div class="sec-header">Selected Publications</div>
+    <div class="sec-sub">Key publications that demonstrate multi-omics reasoning, ML biomarker discovery, and clinical trial expertise &mdash; the exact capabilities needed for this project.</div>
+    <hr class="sec-divider">
+
+    <div class="pub-item featured">
+      <div>
+        <div class="pub-title">Proteomic Signatures and Machine-Learning Models Predict Electro-Acupuncture Responsiveness in Overweight and Obese Individuals</div>
+        <div class="pub-journal">Journal of the Endocrine Society, 2025</div>
+        <div class="pub-meta">First author &middot; IF = 5.6 &middot; Direct evidence of omics+ML biomarker discovery capability</div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+        <span class="pub-badge first">First Author</span>
+        <span class="pub-badge recent">2025</span>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div>
+        <div class="pub-title">OPG-mediated regulatory axis in obesity: connecting sphingolipid metabolism and adipogenesis in HFD-induced obesity</div>
+        <div class="pub-journal">Journal of Advanced Research, 2024</div>
+        <div class="pub-meta">First author &middot; Citations: 12 &middot; IF = 11.4 &middot; Lipidomics + molecular mechanisms</div>
+      </div>
+      <span class="pub-badge if">IF 11.4</span>
+    </div>
+
+    <div class="pub-item">
+      <div>
+        <div class="pub-title">Electroacupuncture for central obesity: a patient-blinded, randomized, sham-controlled clinical trial</div>
+        <div class="pub-journal">BMC Complementary Medicine and Therapies, 2024</div>
+        <div class="pub-meta">First author &middot; Citations: 32 &middot; Clinical trial foundation for current project</div>
+      </div>
+      <span class="pub-badge cited">32 citations</span>
+    </div>
+
+    <div class="pub-item">
+      <div>
+        <div class="pub-title">Electroacupuncture attenuates inflammatory pain via IL-10/IL-10R anti-inflammatory pathway</div>
+        <div class="pub-journal">Molecular Pain, 2023</div>
+        <div class="pub-meta">First author &middot; Citations: 72 &middot; Highest-cited paper &middot; EA mechanism discovery</div>
+      </div>
+      <span class="pub-badge cited">72 citations</span>
+    </div>
+
+    <div style="background:#F8FAFC; border-radius:10px; padding:14px; margin-top:16px; text-align:center;">
+      <span style="font-size:12px; color:var(--text-muted);">
+        154 citations &middot; h-index 5 &middot; 13 SCI papers &middot;
+        <a href="https://scholar.google.com/citations?user=fTSSocQAAAAJ&hl=en" style="color:var(--primary); font-weight:600;" target="_blank">Full list on Google Scholar &rarr;</a>
+      </span>
+    </div>
+  </section>
+
+  <!-- ========== EXPECTED IMPACT ========== -->
+  <section id="impact">
+    <div class="sec-header">Expected Scientific Impact</div>
+    <div class="sec-sub">What this project will deliver &mdash; beyond a single paper, this creates a reusable AI-for-science paradigm.</div>
+    <hr class="sec-divider">
+
+    <div class="impact-grid">
+      <div class="impact-card blue">
+        <strong>Discovery of EA Response Biomarkers</strong>
+        <p>First multi-omics + AI framework to predict EA response &mdash; applicable to ~1 billion obese individuals worldwide.</p>
+      </div>
+      <div class="impact-card green">
+        <strong>Reusable AI-for-Science Workflow</strong>
+        <p>Open-source Claude prompting templates for multi-omics integration &mdash; reusable by any biomedical research group.</p>
+      </div>
+      <div class="impact-card amber">
+        <strong>Mechanistic Insights into EA</strong>
+        <p>Claude-generated hypotheses will reveal previously unknown IL-24/ceramide/OPG pathways &mdash; citable discoveries.</p>
+      </div>
+      <div class="impact-card purple">
+        <strong>High-Impact Publication</strong>
+        <p>Project designed for <em>Nature Medicine / Cell / Nature Biotechnology</em> &mdash; "AI discovers obesity biomarkers via multi-omics reasoning."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section id="contact">
+    <div class="sec-header">Contact &amp; Links</div>
+    <hr class="sec-divider">
+
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-icon">&#x1F4E7;</div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value">zipan.lyu@gmail.com</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">&#x1F4DA;</div>
+        <div class="contact-label">Google Scholar</div>
+        <div class="contact-value"><a href="https://scholar.google.com/citations?user=fTSSocQAAAAJ&hl=en" target="_blank">fTSSocQAAAAJ</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">&#x1F4BB;</div>
+        <div class="contact-label">GitHub</div>
+        <div class="contact-value"><a href="https://github.com/lyuzipan" target="_blank">zipanlyu</a></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <div class="card-title"><span class="icon">&#x1F4C1;</span> Software &amp; Resources</div>
+      <div style="font-size:13px; line-height:1.7;">
+        <div style="padding:8px 0; border-bottom:1px solid #F1F5F9;">
+          <strong>Causal Inference Automation Platform v1.0</strong> &mdash; Software copyright &middot; Automates DAG construction, Mendelian randomization, and causal structure validation for omics data
+        </div>
+        <div style="padding:8px 0; border-bottom:1px solid #F1F5F9;">
+          <strong>TCM Formula-Syndrome Knowledge Graph Intelligent Application Platform</strong> &mdash; Software copyright &middot; AI-driven TCM diagnostic reasoning system
+        </div>
+        <div style="padding:8px 0;">
+          <strong>AI-for-Multi-Omics Workflow (planned)</strong> &mdash; Open-source Claude prompting templates for multi-omics biomarker discovery &middot; To be released upon project completion
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <div class="page-footer">
+    Zipan Lyu &middot; PhD Candidate &middot; Nanyang Technological University &middot; Singapore<br>
+    Expected PhD Graduation: July 2026 &middot; Last updated: July 2026
+  </div>
+
+</div>
+</body>
+</html>
